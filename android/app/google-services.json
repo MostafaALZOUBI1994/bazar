@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "681818775003",
+    "project_id": "bazarcom-2262d",
+    "storage_bucket": "bazarcom-2262d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681818775003:android:ac550887176d3d71d89bfe",
+        "android_client_info": {
+          "package_name": "com.example.bazarcom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681818775003-5iflsu90sjtghjtkunhrdds1uvgi3n2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDilb4Cx2KKP8ac8BV8dnCtOpv0o1fUpME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681818775003-5iflsu90sjtghjtkunhrdds1uvgi3n2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
