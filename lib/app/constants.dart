@@ -1,4 +1,7 @@
+
+import 'package:dart_strapi/dart_strapi.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 ///===============Colors:===============//
 //Canvas color (bg):
@@ -19,6 +22,15 @@ const Gradient kOrangeGradient = LinearGradient(
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
+);
+
+var deviceWidth=Get.width;
+
+var deviceHieght=Get.height;
+
+final strapiClient = Strapi(
+ baseUrl,
+  // token: 'token',
 );
 
 const baseUrl = 'http://192.168.1.101:1337';

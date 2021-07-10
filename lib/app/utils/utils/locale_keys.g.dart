@@ -1,0 +1,56 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+abstract class  LocaleKeys {
+  static const noAdvertisment = 'No Advertisment';
+  static const adsName = 'Advertisment Name';
+  static const price = 'Price';
+  static const adsDate = 'Advertisment Date';
+  static const views = 'Views';
+  static const department = 'Department';
+  static const  governorate= 'Governorate';
+  static const adsType = 'Advertisment Type';
+  static const category = 'Category';
+  static const model = 'Model';
+  static const manufactureYear = 'Manufacture Year';
+  static const status = 'Status';
+  static const guarantee = 'Guarantee';
+  static const gear = 'Gear';
+  static const engineSize = 'Engine Size';
+  static const enginePower = 'Engine Power';
+  static const widgetQuality = 'Widget quality';
+  static const unitType = 'Unit Type';
+  static const typeOfFurniture = 'Type Of Furniture';
+  static const numberOfRooms = 'Number Of Rooms';
+  static const space = 'Space';
+  static const paymentMethod = 'Payment Method';
+  static const sex = 'Sex';
+  static const qualification = 'Qualification';
+  static const experience = 'Experience';
+  static const salary = 'Salary';
+  static const kilometers = 'Kilometers';
+  static const deliveryMethod = 'Delivery Method';
+  static const delivery = 'Delivery';
+  static const network = 'Network';
+  static const sim ="Sim";
+  static const storage = 'Storage';
+  static const camera = 'Camera';
+  static const customs = 'Customs';
+  static const cameraResolution = 'Camera Resolution';
+  static const specification = 'Specification';
+  static const number = 'Number';
+  static const horseType = 'Horse Type';
+  static const age = 'Age';
+  static const description="Description";
+  static const video="Video";
+  static const noDescription="No Description exist";
+  static const email="Email";
+  static const password="Password";
+  static const login="Login";
+  static const forgotPassword="Forgot Password ?";
+  static const existingUser="Existing User ?";
+  static const signUp="Sign Up";
+  static const or="OR";
+  static const phoneNumber="Phone Number";
+  static const emailIsExist="email is exist";
+  static const noInternetConnection="No Internet Connection";
+}

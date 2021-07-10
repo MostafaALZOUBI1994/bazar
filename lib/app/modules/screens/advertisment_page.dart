@@ -1,8 +1,11 @@
 import 'package:bazarcom/app/data/models/advertisment_model.dart';
 import 'package:bazarcom/app/data/providers/advertisment_provider.dart';
+import 'package:bazarcom/app/data/providers/categories_provider.dart';
 import 'package:bazarcom/app/data/repositories/advertisment_repository.dart';
 import 'package:bazarcom/app/modules/controllers/advertisment_list_controller.dart';
-import 'package:bazarcom/app/modules/screens/product_details.dart';
+import 'package:bazarcom/app/modules/screens/advertisment_details.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -22,12 +25,12 @@ class AdvertismentsList extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: Get.height / 15,
+          toolbarHeight: deviceHieght / 15,
           title: Container(
               child: Image.asset(
             "assets/images/4.png",
-            width: Get.width / 2,
-            height: Get.height / 10,
+            width: deviceWidth / 2,
+            height: deviceHieght / 10,
           )),
           centerTitle: true,
           shape: RoundedRectangleBorder(
@@ -46,14 +49,15 @@ class AdvertismentsList extends StatelessWidget {
                       ? Center(
                           child: Text(
                             "لا يوجد إعلانات",
-                            style: TextStyle(color: kColorOfBlueRect),
+                            style: TextStyle(color: kColorOfCanvas),
                           ),
                         )
                       : Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: AnimationLimiter(
                             child: GridView.count(
-                              crossAxisCount: 2,childAspectRatio: 13/16,
+                              crossAxisCount: 2,
+                              childAspectRatio: 13 / 16,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 10,
                               children: List.generate(
@@ -67,9 +71,18 @@ class AdvertismentsList extends StatelessWidget {
                                     columnCount: 2,
                                     child: ScaleAnimation(
                                       child: FadeInAnimation(
-                                        child: InkWell(onTap: (){
-                                          Get.to(ProductDetailPage());
-                                        },
+                                        child: InkWell(
+                                          onTap: () async {
+
+                                            var fields = CategoryApi(
+                                                    httpClient: null)
+                                                .getFieldsRelatedToSubCategories(
+                                                    subCategryId, advertisment);
+                                            Get.to(AdevertismentDetailPage(
+                                              advertisment: advertisment,
+                                              fields: fields,
+                                            ));
+                                          },
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(16),
@@ -77,7 +90,7 @@ class AdvertismentsList extends StatelessWidget {
                                               decoration: BoxDecoration(
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: kColorOfBlueRect
+                                                    color: kColorOfCanvas
                                                         .withOpacity(0.1),
                                                     spreadRadius: 5,
                                                     blurRadius: 7,
@@ -89,35 +102,46 @@ class AdvertismentsList extends StatelessWidget {
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceAround,
+                                                    MainAxisAlignment
+                                                        .spaceAround,
                                                 children: [
                                                   Flexible(
-                                                    child: Image.network(
-                                                      baseUrl +
-                                                          advertisment
-                                                              .imagess[0].url,
-                                                      height: Get.height / 6,width: Get.width,
+                                                    child:advertisment.imagess.isEmpty?
+                                              CachedNetworkImage(
+                                              imageUrl:  "https://i.stack.imgur.com/y9DpT.jpg",
+                                                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                    CircularProgressIndicator(value: downloadProgress.progress),
+                                                errorWidget: (context, url, error) => Icon(Icons.error),
+                                              )
+                                                        : CachedNetworkImage(
+                                                      imageUrl:  baseUrl +
+                                                  advertisment
+                                                  .imagess[0],
+                                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                                          CircularProgressIndicator(value: downloadProgress.progress),
+                                                      errorWidget: (context, url, error) => Icon(Icons.error),
                                                     ),
                                                   ),
                                                   Row(
                                                     children: [
                                                       SizedBox(
-                                                        width: Get.width / 40,
+                                                        width: deviceWidth / 40,
                                                       ),
                                                       Text(
                                                         advertisment.name,
                                                         style: TextStyle(
                                                             color:
-                                                                kColorOfBlueRect,
+                                                                kColorOfCanvas,
                                                             fontWeight:
-                                                                FontWeight.w600),
+                                                                FontWeight
+                                                                    .w600),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
                                                       SizedBox(
-                                                        width: Get.width / 40,
+                                                        width: deviceWidth / 40,
                                                       ),
                                                       Icon(
                                                         Icons
@@ -125,9 +149,10 @@ class AdvertismentsList extends StatelessWidget {
                                                         color: kOrangeColor,
                                                       ),
                                                       Text(
-                                                        advertisment.views,
+                                                        advertisment.views.toString(),
                                                         style: TextStyle(
-                                                          color: kColorOfBlueRect,
+                                                          color:
+                                                              kColorOfCanvas,
                                                         ),
                                                       ),
                                                     ],
@@ -135,7 +160,7 @@ class AdvertismentsList extends StatelessWidget {
                                                   Row(
                                                     children: [
                                                       SizedBox(
-                                                        width: Get.width / 40,
+                                                        width: deviceWidth / 40,
                                                       ),
                                                       Icon(
                                                         Icons
@@ -146,7 +171,8 @@ class AdvertismentsList extends StatelessWidget {
                                                         advertisment.price
                                                             .toString(),
                                                         style: TextStyle(
-                                                          color: kColorOfBlueRect,
+                                                          color:
+                                                              kColorOfCanvas,
                                                         ),
                                                       ),
                                                     ],

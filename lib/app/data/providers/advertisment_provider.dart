@@ -9,9 +9,6 @@ class AdvertismentApiClient {
 
   AdvertismentApiClient({@required this.httpClient});
 
-  final Map<String, String> _defaultHeaders = {
-    'Content-Type': 'application/json'
-  };
 
   Future<List<Advertisment>> getAdvertisment(int subCategoryId) async {
     List<Advertisment> advertisments = [];

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class Advertisment {
   int id;
   String name;
@@ -7,11 +9,16 @@ class Advertisment {
   String city;
   String category;
   String models;
+  //الحالة == المؤهل العلمي (وظائف) == يشمل التوصيل (طبخ حلويات)== حالة الخط(أرقام الهواتف)
   String status;
   String guarantee;
+  // العمر(أغنام وجمال)(الخيول)(الطيور)(الحيوانات اليفة)(التحف الانتيك)
   String manufacturingYear;
+  // عدد الغرف (عقارات) == المساحة بالدونم(أراضي)== سنوات الخبرة(وظائف)== سعة التخزين (هواتف)
   String kilometers;
+  // مغيرالسرعة == جودة القطعة (قطع الغيار) == نوع الوحدة (تكييف) == نوع الفرش (عقارات) == طريقة الدفع(أراضي) == الجنس (وظائف)==طريقة الطلب (طبخ حلويات)== تفاصيل الخط (هواتف)==الميزات(كاميرا و فيديو)== نوع الشبكة(أرقام هواتف) == الجنس(الطيور)(حيوانات أليفة)
   String gear;
+  // السعر == الراتب (وظائف)
   int price;
   String subject;
   String description;
@@ -23,12 +30,18 @@ class Advertisment {
   String createdAt;
   String updatedAt;
   String userToken;
-  List<Imagess> imagess;
+  List<String> imagess;
   String video;
+  //قوة المحرك (دراجات)==وضوح الكاميرا (هواتف)(كاميرا فيديو)==العدد(أغنام وجمال)(الخيول)(الطيور)(حيوانات أليفة)
+  String enginePower;
+  // المحرك (دراجات)==مجمرك (هواتف)(الكترونيات) == نوع الخيل(الخيول)
+  String engineSize;
 
   Advertisment(
       {this.id,
         this.name,
+        this.enginePower,
+        this.engineSize,
         this.subCategory,
         this.typeOfAds,
         this.governorate,
@@ -72,20 +85,22 @@ class Advertisment {
     subject = json['subject'];
     description = json['description'];
     userId = json['user_id'];
-    publishedDate = json['published_date'];
+    //publishedDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(json['published_date']));
     userNumber = json['user_number'];
     views = json['views'];
-    publishedAt = json['published_at'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    publishedAt =  DateFormat('yyyy-MM-dd').format(DateTime.parse(json['published_at']));
+    createdAt =DateFormat('yyyy-MM-dd').format(DateTime.parse(json['created_at']));
+    updatedAt = DateFormat('yyyy-MM-dd').format(DateTime.parse(json['updated_at']));
     userToken = json['user_token'];
+    enginePower =json['engine_power'];
+    engineSize=json['engine_size'];
     if (json['imagess'] != null) {
-      imagess = new List<Imagess>();
+      imagess = new List<String>();
       json['imagess'].forEach((v) {
-        imagess.add(new Imagess.fromJson(v));
+        imagess.add(v["url"]);
       });
     }
-    video = json['video'];
+    video =json['video']==null?"": json['video']['url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -105,6 +120,8 @@ class Advertisment {
     data['gear'] = this.gear;
     data['price'] = this.price;
     data['subject'] = this.subject;
+    data["engine_power"] =this.enginePower;
+    data["engine_size"] =this.engineSize;
     data['description'] = this.description;
     data['user_id'] = this.userId;
     data['published_date'] = this.publishedDate;
@@ -114,86 +131,33 @@ class Advertisment {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['user_token'] = this.userToken;
+    //TODO upload images
+    /*
     if (this.imagess != null) {
       data['imagess'] = this.imagess.map((v) => v.toJson()).toList();
     }
+
+     */
     data['video'] = this.video;
     return data;
   }
 }
 
 class Imagess {
-  int id;
-  String name;
-  String alternativeText;
-  String caption;
-  int width;
-  int height;
-  Formats formats;
-  String hash;
-  String ext;
-  String mime;
-  double size;
   String url;
-  String provider;
-  String createdAt;
-  String updatedAt;
 
   Imagess(
-      {this.id,
-        this.name,
-        this.alternativeText,
-        this.caption,
-        this.width,
-        this.height,
-        this.formats,
-        this.hash,
-        this.ext,
-        this.mime,
-        this.size,
+      {
         this.url,
-        this.provider,
-        this.createdAt,
-        this.updatedAt});
+      });
 
   Imagess.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    alternativeText = json['alternativeText'];
-    caption = json['caption'];
-    width = json['width'];
-    height = json['height'];
-    formats =
-    json['formats'] != null ? new Formats.fromJson(json['formats']) : null;
-    hash = json['hash'];
-    ext = json['ext'];
-    mime = json['mime'];
-    size = json['size'];
     url = json['url'];
-    provider = json['provider'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['alternativeText'] = this.alternativeText;
-    data['caption'] = this.caption;
-    data['width'] = this.width;
-    data['height'] = this.height;
-    if (this.formats != null) {
-      data['formats'] = this.formats.toJson();
-    }
-    data['hash'] = this.hash;
-    data['ext'] = this.ext;
-    data['mime'] = this.mime;
-    data['size'] = this.size;
     data['url'] = this.url;
-    data['provider'] = this.provider;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
     return data;
   }
 }
