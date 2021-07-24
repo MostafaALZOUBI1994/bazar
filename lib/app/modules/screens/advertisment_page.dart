@@ -73,7 +73,6 @@ class AdvertismentsList extends StatelessWidget {
                                       child: FadeInAnimation(
                                         child: InkWell(
                                           onTap: () async {
-
                                             var fields = CategoryApi(
                                                     httpClient: null)
                                                 .getFieldsRelatedToSubCategories(

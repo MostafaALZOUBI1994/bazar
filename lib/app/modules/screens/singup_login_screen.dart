@@ -24,7 +24,8 @@ class _SingupLoginPageState extends State<SingupLoginPage> {
   );
   @override
   Widget build(BuildContext context) {
-    final AuthController authController = Get.put(AuthController(authRepository));
+    final AuthController authController =
+        Get.put(AuthController(authRepository));
     return Scaffold(
       backgroundColor: kColorOfCanvas,
       body: SingleChildScrollView(
@@ -51,9 +52,13 @@ class _SingupLoginPageState extends State<SingupLoginPage> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 32, vertical: 16),
-                          child: login ? Login(authController: authController,
-                            emailController: emailController,
-                            passwordController: passwordController,) : LoginOption(),
+                          child: login
+                              ? Login(
+                                  authController: authController,
+                                  emailController: emailController,
+                                  passwordController: passwordController,
+                                )
+                              : LoginOption(),
                         ),
                       ),
                     ),
@@ -80,10 +85,11 @@ class _SingupLoginPageState extends State<SingupLoginPage> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 32, vertical: 16),
                           child: !login
-                              ? SignUp(authController: authController,
+                              ? SignUp(
+                                  authController: authController,
                                   emailController: emailController,
                                   passwordController: passwordController,
-                            phoneNumberController: phoneNumberController,
+                                  phoneNumberController: phoneNumberController,
                                 )
                               : SignUpOption(),
                         ),

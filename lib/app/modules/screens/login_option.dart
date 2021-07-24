@@ -17,7 +17,7 @@ class LoginOption extends StatelessWidget {
         ),
 
         SizedBox(
-          height: 16,
+          height: deviceHieght / 30,
         ),
 
         Container(

@@ -9,6 +9,7 @@ class Advertisment {
   String city;
   String category;
   String models;
+  String kindOfAdvertisment;
   //الحالة == المؤهل العلمي (وظائف) == يشمل التوصيل (طبخ حلويات)== حالة الخط(أرقام الهواتف)
   String status;
   String guarantee;
@@ -64,7 +65,7 @@ class Advertisment {
         this.createdAt,
         this.updatedAt,
         this.userToken,
-        this.imagess,
+        this.imagess,this.kindOfAdvertisment,
         this.video});
 
   Advertisment.fromJson(Map<String, dynamic> json) {
@@ -94,6 +95,7 @@ class Advertisment {
     userToken = json['user_token'];
     enginePower =json['engine_power'];
     engineSize=json['engine_size'];
+    kindOfAdvertisment=json["kindOfAdvertisment"];
     if (json['imagess'] != null) {
       imagess = new List<String>();
       json['imagess'].forEach((v) {
@@ -131,6 +133,7 @@ class Advertisment {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['user_token'] = this.userToken;
+    data['kindOfAdvertisment'] = this.kindOfAdvertisment;
     //TODO upload images
     /*
     if (this.imagess != null) {
@@ -161,85 +164,3 @@ class Imagess {
     return data;
   }
 }
-
-class Formats {
-  Thumbnail thumbnail;
-  Thumbnail large;
-  Thumbnail medium;
-  Thumbnail small;
-
-  Formats({this.thumbnail, this.large, this.medium, this.small});
-
-  Formats.fromJson(Map<String, dynamic> json) {
-    thumbnail = json['thumbnail'] != null
-        ? new Thumbnail.fromJson(json['thumbnail'])
-        : null;
-    large =
-    json['large'] != null ? new Thumbnail.fromJson(json['large']) : null;
-    medium =
-    json['medium'] != null ? new Thumbnail.fromJson(json['medium']) : null;
-    small =
-    json['small'] != null ? new Thumbnail.fromJson(json['small']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.thumbnail != null) {
-      data['thumbnail'] = this.thumbnail.toJson();
-    }
-    if (this.large != null) {
-      data['large'] = this.large.toJson();
-    }
-    if (this.medium != null) {
-      data['medium'] = this.medium.toJson();
-    }
-    if (this.small != null) {
-      data['small'] = this.small.toJson();
-    }
-    return data;
-  }
-}
-
-class Thumbnail {
-  String name;
-  String hash;
-  String ext;
-  String mime;
-  int width;
-  int height;
-  double size;
-  String url;
-
-  Thumbnail(
-      {this.name,
-        this.hash,
-        this.ext,
-        this.mime,
-        this.width,
-        this.height,
-        this.size,
-        this.url});
-
-  Thumbnail.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    hash = json['hash'];
-    ext = json['ext'];
-    mime = json['mime'];
-    width = json['width'];
-    height = json['height'];
-    size = json['size'];
-    url = json['url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['hash'] = this.hash;
-    data['ext'] = this.ext;
-    data['mime'] = this.mime;
-    data['width'] = this.width;
-    data['height'] = this.height;
-    data['size'] = this.size;
-    data['url'] = this.url;
-    return data;
-  }}

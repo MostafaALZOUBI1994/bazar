@@ -1,5 +1,6 @@
 import 'package:bazarcom/app/data/models/user_model.dart';
 import 'package:bazarcom/app/data/repositories/auth_repositoy.dart';
+import 'package:bazarcom/app/modules/screens/home_page.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -18,6 +19,7 @@ class AuthController extends GetxController {
   login(String email,String password) async {
     user = await authRepository.login( email, password);
     authRepository.saveUserToken(user.jwt);
+    Get.off(HomePage());
   }
 
   getUserProfile() async {

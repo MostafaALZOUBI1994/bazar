@@ -51,9 +51,8 @@ class SubCategory {
   String createdAt;
   String updatedAt;
   String image;
-  
-
-  SubCategory({this.id, this.name, this.category, this.nameAr, this.publishedAt, this.createdAt, this.updatedAt, this.image});
+  List<String> kindOfAdvertisment;
+  SubCategory({this.id, this.name, this.category, this.nameAr, this.publishedAt, this.createdAt, this.updatedAt, this.image,this.kindOfAdvertisment});
 
   SubCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -64,6 +63,7 @@ class SubCategory {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     image = json['image']["url"];
+    kindOfAdvertisment=json["KindOfAdvertisment"]==null?[]: json["KindOfAdvertisment"].cast<String>() ;
   }
 
   Map<String, dynamic> toJson() {

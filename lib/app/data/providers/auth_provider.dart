@@ -1,5 +1,6 @@
 import 'package:bazarcom/app/constants.dart';
 import 'package:bazarcom/app/data/models/user_model.dart';
+import 'package:bazarcom/app/global_widgets/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -16,10 +17,7 @@ class AuthApiClient {
       print(ok.toString());
       user = User.fromJson(ok.data);
     }, error: (e) {
-      Get.snackbar(
-        "Bazarcom",
-        e.message,backgroundColor: kColorOfCanvas,borderRadius: 20,
-      );
+      showSnakBarBottom(e.message, kColorOfYellowRect);
     });
     return user;
   }
@@ -33,9 +31,8 @@ class AuthApiClient {
       print(ok.toString());
       user = User.fromJson(ok.data);
     }, error: (e) {
-      Get.snackbar(
-        "Bazarcom",
-        e.message,backgroundColor: kColorOfCanvas,borderRadius: 20,
+      showSnakBarTop(
+        e.message,kColorOfBlueRect
       );
     });
     return user;

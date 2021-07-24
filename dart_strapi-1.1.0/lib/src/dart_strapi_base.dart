@@ -448,10 +448,10 @@ class Strapi {
 
     if(e is DioError){
       if(e.type==DioErrorType.response){
-        return models.ErrorResponse("email is exist");
+        return models.ErrorResponse("الإيميل الذي أدخلته موجود مسبقا");
       }
       else{
-        return models.ErrorResponse("no internet");
+        return models.ErrorResponse("لا يوجد اتصال بالانترنت");
       }
 
     }
@@ -480,11 +480,24 @@ class Strapi {
           'password': password,
         },
       );
-
       return models.OkResponse(
         response.data,
       );
     } catch (e) {
+      if(e is DioError){
+        if(e.type==DioErrorType.response){
+          return models.ErrorResponse("الإيميل الذي أدخلته غير موجود مسبقا");
+        }
+        else{
+          return models.ErrorResponse("لا يوجد اتصال بالإنترنت");
+        }
+
+      }
+      else{
+
+
+      }
+
       return models.ErrorResponse(e.toString());
     }
   }

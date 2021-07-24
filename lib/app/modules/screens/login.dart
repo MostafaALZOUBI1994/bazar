@@ -94,10 +94,10 @@ class Login extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 16,
+          height: deviceHieght / 30,
         ),
         TextField(
-          controller: passwordController,
+          controller: passwordController,obscureText: true,
           decoration: InputDecoration(
             hintText: LocaleKeys.password.tranlation(),
             hintStyle: TextStyle(
@@ -117,7 +117,7 @@ class Login extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 24,
+          height: deviceHieght / 30,
         ),
         InkWell(
           onTap: () async {
@@ -154,7 +154,7 @@ class Login extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 16,
+          height: deviceHieght / 30,
         ),
         InkWell(
           onTap: () {

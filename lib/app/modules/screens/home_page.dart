@@ -11,15 +11,15 @@ import 'package:bazarcom/app/modules/controllers/auth_controller.dart';
 
 import 'package:bazarcom/app/modules/screens/advertisment_page.dart';
 import 'package:bazarcom/app/modules/controllers/home_controller.dart';
-import 'package:bazarcom/app/modules/screens/signup.dart';
 import 'package:bazarcom/app/modules/screens/singup_login_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import 'add_addvertisment.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final AuthController c = Get.put(AuthController(authRepository));
+    final HomeController homeController = Get.put(HomeController(repository: categoryRepository));
     AuthStorage().isLogged()?c.getUserProfile():(){};
     return SafeArea(
       child: Scaffold(
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             c.user.jwt == null
                 ? Get.to(() => SingupLoginPage())
-                : Get.to(() => SingupLoginPage());
+                : Get.to(() => AddAdvertisment(homeController: homeController,));
           },
           //params
         ),
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Container(
             child: GetX<HomeController>(
-              init: HomeController(repository: categoryRepository),
+              init: homeController,
               builder: (_) {
                 return _.isLoading.value
                     ? Center(child: CircularProgressIndicator())

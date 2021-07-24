@@ -47,6 +47,7 @@ dependencies:
   url_launcher: 6.0.4
   fab_circular_menu: ^1.0.2
   custom_splash: ^0.0.2
+  image_pickers: ^1.0.8+7
   dart_strapi:
     path: ./dart_strapi-1.1.0
 
