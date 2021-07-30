@@ -235,7 +235,7 @@ class Strapi {
   /// Collection Type - Create a {content-type} entry
   ///
   /// {@macro queryParameters}
-  Future<models.Response<models.Entry>> create(
+  Future create(
     String collectionName,
     dynamic data, {
     Map<String, dynamic> queryParameters = const {},
@@ -253,21 +253,15 @@ class Strapi {
         throw 'Created data not map';
       }
 
-      if (response.data['_id'] == null) {
+      if (response.data['id'] == null) {
         throw 'Created null id';
       }
 
-      final id = response.data['_id'] is String
-          ? models.StringIdentifier(response.data['_id'])
-          : models.IntIdentifier(response.data['_id']);
+      final id = response.data['id'] is String
+          ? models.StringIdentifier(response.data['id'])
+          : models.IntIdentifier(response.data['id']);
 
-      return models.OkResponse(
-        models.Entry(
-          collectionName: collectionName,
-          id: id,
-          data: response.data,
-        ),
-      );
+      return response.data;
     } catch (e) {
       return models.ErrorResponse(e.toString());
     }

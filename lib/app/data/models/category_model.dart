@@ -8,7 +8,15 @@ class CategoryModel {
   String image;
   List<SubCategory> subCategories;
 
-  CategoryModel({this.id, this.name,  this.nameAr, this.publishedAt, this.createdAt, this.updatedAt, this.image, this.subCategories});
+  CategoryModel(
+      {this.id,
+      this.name,
+      this.nameAr,
+      this.publishedAt,
+      this.createdAt,
+      this.updatedAt,
+      this.image,
+      this.subCategories});
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -20,7 +28,9 @@ class CategoryModel {
     image = json['image']["formats"]["url"];
     if (json['sub_categories'] != null) {
       subCategories = new List<SubCategory>();
-      json['sub_categories'].forEach((v) { subCategories.add(new SubCategory.fromJson(v)); });
+      json['sub_categories'].forEach((v) {
+        subCategories.add(new SubCategory.fromJson(v));
+      });
     }
   }
 
@@ -36,7 +46,8 @@ class CategoryModel {
       data['image'] = this.image;
     }
     if (this.subCategories != null) {
-      data['sub_categories'] = this.subCategories.map((v) => v.toJson()).toList();
+      data['sub_categories'] =
+          this.subCategories.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -52,7 +63,23 @@ class SubCategory {
   String updatedAt;
   String image;
   List<String> kindOfAdvertisment;
-  SubCategory({this.id, this.name, this.category, this.nameAr, this.publishedAt, this.createdAt, this.updatedAt, this.image,this.kindOfAdvertisment});
+  List<String> status;
+  List<dynamic> advertistemntCategories;
+  List<String> guarantee;
+  String kilometers;
+  List<String> gear;
+  SubCategory(
+      {this.id,
+      this.name,
+      this.category,
+      this.nameAr,
+      this.publishedAt,
+      this.createdAt,
+      this.updatedAt,
+      this.image,
+      this.kindOfAdvertisment,
+      this.advertistemntCategories,
+      this.status,this.guarantee,this.kilometers,this.gear});
 
   SubCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -63,7 +90,15 @@ class SubCategory {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     image = json['image']["url"];
-    kindOfAdvertisment=json["KindOfAdvertisment"]==null?[]: json["KindOfAdvertisment"].cast<String>() ;
+    kindOfAdvertisment = json["KindOfAdvertisment"] == null
+        ? []
+        : json["KindOfAdvertisment"].cast<String>();
+    advertistemntCategories =
+        json["categories"] == null ? [] : json["categories"];
+    status= json["status"] == null ? [] : json["status"].cast<String>();
+    guarantee=json["guarantee"] == null ? [] : json["guarantee"].cast<String>();
+    kilometers=json["kilometers"] ==null ? "" :json["kilometers"];
+    gear=json["gear"] == null ? [] : json["gear"].cast<String>();
   }
 
   Map<String, dynamic> toJson() {

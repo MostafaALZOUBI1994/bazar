@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             c.user.jwt == null
                 ? Get.to(() => SingupLoginPage())
-                : Get.to(() => AddAdvertisment(homeController: homeController,));
+                : Get.to(() => AddAdvertisment(homeController: homeController,authController: c,));
           },
           //params
         ),
