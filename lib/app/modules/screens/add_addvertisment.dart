@@ -99,164 +99,44 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              top: deviceHieght / 40,
-            ),
-            child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: kColorOfYellowRect, width: 2),
-                    color: kColorOfBlueRect),
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      advertisment.name = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(right: 8.0),
-                      border: InputBorder.none,
-                      hintText: "اسم الإعلان",
-                      hintStyle: fieldsHint),
-                )),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: deviceHieght / 40,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: kColorOfYellowRect, width: 2),
-                  color: kColorOfBlueRect),
-              child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                hint: Text(
-                  "  المحافظة",
-                  style: fieldsHint,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: deviceHieght / 40,
                 ),
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.white,
-                ),
-                elevation: 8,
-                value: selectedGovernorate,
-                onChanged: (String value) {
-                  setState(() {
-                    selectedGovernorate = value;
-                    advertisment.governorate = selectedGovernorate;
-                  });
-                },
-                underline: Container(
-                  color: Colors.amber,
-                ),
-                items: governorates.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        new Text(value),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              )),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: deviceHieght / 40,
-            ),
-            child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: kColorOfYellowRect, width: 2),
-                    color: kColorOfBlueRect),
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      advertisment.city = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(right: 8.0),
-                      border: InputBorder.none,
-                      hintText: "المدينة",
-                      hintStyle: fieldsHint),
-                )),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: deviceHieght / 40,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: kColorOfYellowRect, width: 2),
-                  color: kColorOfBlueRect),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<CategoryModel>(
-                  hint: Text(
-                    "  القسم الرئيسي",
-                    style: fieldsHint,
-                  ),
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
-                  ),
-                  elevation: 8,
-                  value: selectedCategory,
-                  underline: Container(
-                    color: Colors.amber,
-                  ),
-                  onChanged: (CategoryModel value) {
-                    setState(() {
-                      selectedCategory = value;
-                      selectedSubCategory = null;
-                    });
-                  },
-                  items: categoryList.map((CategoryModel category) {
-                    return DropdownMenuItem<CategoryModel>(
-                      value: category,
-                      child: Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            category.nameAr,
-                            style: fieldsHint,
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-          ),
-          selectedCategory == null
-              ? Container()
-              : Padding(
-                  padding: EdgeInsets.only(
-                    top: deviceHieght / 40,
-                  ),
-                  child: Container(
+                child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: kColorOfYellowRect, width: 2),
                         color: kColorOfBlueRect),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<SubCategory>(
+                    child: TextFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          advertisment.name = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(right: 8.0),
+                          border: InputBorder.none,
+                          hintText: "اسم الإعلان",
+                          hintStyle: fieldsHint),
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: deviceHieght / 40,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: kColorOfYellowRect, width: 2),
+                      color: kColorOfBlueRect),
+                  child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
                         hint: Text(
-                          "القسم الفرعي",
+                          "  المحافظة",
                           style: fieldsHint,
                         ),
                         icon: Icon(
@@ -264,55 +144,314 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
                           color: Colors.white,
                         ),
                         elevation: 8,
-                        value: selectedSubCategory,
-                        onChanged: (SubCategory value) {
+                        value: selectedGovernorate,
+                        onChanged: (String value) {
                           setState(() {
-                            selectedSubCategory = value;
-                            advertisment.subCategory = value.id;
+                            selectedGovernorate = value;
+                            advertisment.governorate = selectedGovernorate;
                           });
                         },
-                        items: selectedCategory.subCategories
-                            .map((SubCategory category) {
-                          return DropdownMenuItem<SubCategory>(
-                            value: category,
+                        underline: Container(
+                          color: Colors.amber,
+                        ),
+                        items: governorates.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
                             child: Row(
-                              children: <Widget>[
+                              children: [
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Text(
-                                  category.nameAr,
-                                  style: fieldsHint,
-                                ),
+                                new Text(value),
                               ],
                             ),
                           );
                         }).toList(),
+                      )),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: deviceHieght / 40,
+                ),
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: kColorOfYellowRect, width: 2),
+                        color: kColorOfBlueRect),
+                    child: TextFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          advertisment.city = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(right: 8.0),
+                          border: InputBorder.none,
+                          hintText: "المدينة",
+                          hintStyle: fieldsHint),
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: deviceHieght / 40,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: kColorOfYellowRect, width: 2),
+                      color: kColorOfBlueRect),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<CategoryModel>(
+                      hint: Text(
+                        "  القسم الرئيسي",
+                        style: fieldsHint,
                       ),
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.white,
+                      ),
+                      elevation: 8,
+                      value: selectedCategory,
+                      underline: Container(
+                        color: Colors.amber,
+                      ),
+                      onChanged: (CategoryModel value) {
+                        setState(() {
+                          selectedCategory = value;
+                          selectedSubCategory = null;
+                        });
+                      },
+                      items: categoryList.map((CategoryModel category) {
+                        return DropdownMenuItem<CategoryModel>(
+                          value: category,
+                          child: Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                category.nameAr,
+                                style: fieldsHint,
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ),
-          selectedSubCategory == null
-              ? Container()
-              : selectedSubCategory.kindOfAdvertisment.isEmpty
+              ),
+              selectedCategory == null
                   ? Container()
                   : Padding(
+                padding: EdgeInsets.only(
+                  top: deviceHieght / 40,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: kColorOfYellowRect, width: 2),
+                      color: kColorOfBlueRect),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<SubCategory>(
+                      hint: Text(
+                        "القسم الفرعي",
+                        style: fieldsHint,
+                      ),
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.white,
+                      ),
+                      elevation: 8,
+                      value: selectedSubCategory,
+                      onChanged: (SubCategory value) {
+                        setState(() {
+                          selectedSubCategory = value;
+                          advertisment.subCategory = value.id;
+                        });
+                      },
+                      items: selectedCategory.subCategories
+                          .map((SubCategory category) {
+                        return DropdownMenuItem<SubCategory>(
+                          value: category,
+                          child: Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                category.nameAr,
+                                style: fieldsHint,
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+              selectedSubCategory == null
+                  ? Container()
+                  : selectedSubCategory.kindOfAdvertisment.isEmpty
+                  ? Container()
+                  : Padding(
+                padding: EdgeInsets.only(
+                  top: deviceHieght / 40,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                              color: kColorOfYellowRect, width: 2),
+                          color: kColorOfBlueRect),
+                      child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            hint: Text(
+                              "  نوع الإعلان",
+                              style: fieldsHint,
+                            ),
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.white,
+                            ),
+                            elevation: 8,
+                            value: selectedKindOfAds,
+                            onChanged: (String value) {
+                              setState(() {
+                                selectedKindOfAds = value;
+                                advertisment.kindOfAdvertisment =
+                                    selectedKindOfAds;
+                              });
+                            },
+                            underline: Container(
+                              color: Colors.amber,
+                            ),
+                            items: selectedSubCategory.kindOfAdvertisment
+                                .map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    new Text(value),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                          )),
+                    ),
+                    selectedSubCategory.advertistemntCategories.isEmpty
+                        ? Container()
+                        : Padding(
                       padding: EdgeInsets.only(
                         top: deviceHieght / 40,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                    color: kColorOfYellowRect, width: 2),
-                                color: kColorOfBlueRect),
-                            child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: kColorOfYellowRect,
+                                width: 2),
+                            color: kColorOfBlueRect),
+                        child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
                               hint: Text(
-                                "  نوع الإعلان",
+                                " الفئة",
+                                style: fieldsHint,
+                              ),
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.white,
+                              ),
+                              value: categoryAd,
+                              onChanged: (value) {
+                                setState(() {
+                                  categoryAd = value;
+                                  advertisment.category = value;
+                                });
+                              },
+                              underline: Container(
+                                color: Colors.amber,
+                              ),
+                              items: selectedSubCategory
+                                  .advertistemntCategories
+                                  .map((value) {
+                                return DropdownMenuItem(
+                                    value: value["name"],
+                                    child: Container(
+                                      height: 30,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          new Text(value["name"]),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Image.network(value["logo"])
+                                        ],
+                                      ),
+                                    ));
+                              }).toList(),
+                            )),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect, width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.models = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "الموديل",
+                                hintStyle: fieldsHint),
+                          )),
+                    ),
+                    selectedSubCategory.status.isEmpty
+                        ? Container()
+                        : Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: kColorOfYellowRect,
+                                width: 2),
+                            color: kColorOfBlueRect),
+                        child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              hint: Text(
+                                selectedSubCategory.id == 10
+                                    ? "  المؤهل العلمي"
+                                    : selectedSubCategory.id == 33
+                                    ? "  يشمل التوصيل"
+                                    : "  الحالة",
                                 style: fieldsHint,
                               ),
                               icon: Icon(
@@ -320,18 +459,17 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
                                 color: Colors.white,
                               ),
                               elevation: 8,
-                              value: selectedKindOfAds,
+                              value: selectedStatus,
                               onChanged: (String value) {
                                 setState(() {
-                                  selectedKindOfAds = value;
-                                  advertisment.kindOfAdvertisment =
-                                      selectedKindOfAds;
+                                  selectedStatus = value;
+                                  advertisment.status = selectedStatus;
                                 });
                               },
                               underline: Container(
                                 color: Colors.amber,
                               ),
-                              items: selectedSubCategory.kindOfAdvertisment
+                              items: selectedSubCategory.status
                                   .map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -346,674 +484,536 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
                                 );
                               }).toList(),
                             )),
-                          ),
-                          selectedSubCategory.advertistemntCategories.isEmpty
-                              ? Container()
-                              : Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                            color: kColorOfYellowRect,
-                                            width: 2),
-                                        color: kColorOfBlueRect),
-                                    child: DropdownButtonHideUnderline(
-                                        child: DropdownButton(
-                                      hint: Text(
-                                        " الفئة",
-                                        style: fieldsHint,
-                                      ),
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.white,
-                                      ),
-                                      value: categoryAd,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          categoryAd = value;
-                                          advertisment.category = value;
-                                        });
-                                      },
-                                      underline: Container(
-                                        color: Colors.amber,
-                                      ),
-                                      items: selectedSubCategory
-                                          .advertistemntCategories
-                                          .map((value) {
-                                        return DropdownMenuItem(
-                                            value: value["name"],
-                                            child: Container(
-                                              height: 30,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  new Text(value["name"]),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Image.network(value["logo"])
-                                                ],
-                                              ),
-                                            ));
-                                      }).toList(),
-                                    )),
-                                  ),
-                                ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: deviceHieght / 40,
-                            ),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                        color: kColorOfYellowRect, width: 2),
-                                    color: kColorOfBlueRect),
-                                child: TextFormField(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      advertisment.models = value;
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.only(right: 8.0),
-                                      border: InputBorder.none,
-                                      hintText: "الموديل",
-                                      hintStyle: fieldsHint),
-                                )),
-                          ),
-                          selectedSubCategory.status.isEmpty
-                              ? Container()
-                              : Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                            color: kColorOfYellowRect,
-                                            width: 2),
-                                        color: kColorOfBlueRect),
-                                    child: DropdownButtonHideUnderline(
-                                        child: DropdownButton<String>(
-                                      hint: Text(
-                                        selectedSubCategory.id == 10
-                                            ? "  المؤهل العلمي"
-                                            : selectedSubCategory.id == 33
-                                                ? "  يشمل التوصيل"
-                                                : "  الحالة",
-                                        style: fieldsHint,
-                                      ),
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.white,
-                                      ),
-                                      elevation: 8,
-                                      value: selectedStatus,
-                                      onChanged: (String value) {
-                                        setState(() {
-                                          selectedStatus = value;
-                                          advertisment.status = selectedStatus;
-                                        });
-                                      },
-                                      underline: Container(
-                                        color: Colors.amber,
-                                      ),
-                                      items: selectedSubCategory.status
-                                          .map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              new Text(value),
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
-                                    )),
-                                  ),
-                                ),
-                          selectedSubCategory.guarantee.isEmpty
-                              ? Container()
-                              : Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                            color: kColorOfYellowRect,
-                                            width: 2),
-                                        color: kColorOfBlueRect),
-                                    child: DropdownButtonHideUnderline(
-                                        child: DropdownButton<String>(
-                                      hint: Text(
-                                        "  الضمان",
-                                        style: fieldsHint,
-                                      ),
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.white,
-                                      ),
-                                      elevation: 8,
-                                      value: selectedGuarantee,
-                                      onChanged: (String value) {
-                                        setState(() {
-                                          selectedGuarantee = value;
-                                          advertisment.guarantee =
-                                              selectedGuarantee;
-                                        });
-                                      },
-                                      underline: Container(
-                                        color: Colors.amber,
-                                      ),
-                                      items: selectedSubCategory.guarantee
-                                          .map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              new Text(value),
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
-                                    )),
-                                  ),
-                                ),
-                          selectedCategory.id == 1 ||
-                                  selectedCategory.id == 9 ||
-                                  selectedCategory.id == 10
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.manufacturingYear =
-                                                value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText: selectedCategory.id ==
-                                                        9 ||
-                                                    selectedSubCategory.id == 47
-                                                ? "العمر"
-                                                : "سنة الصنع",
-                                            hintStyle: fieldsHint),
-                                      )),
-                                )
-                              : Container(),
-                          selectedSubCategory.kilometers.isEmpty
-                              ? Container()
-                              : Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.kilometers = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText:
-                                                selectedSubCategory.kilometers,
-                                            hintStyle: fieldsHint),
-                                      )),
-                                ),
-                          selectedSubCategory.gear.isEmpty
-                              ? Container()
-                              : Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                            color: kColorOfYellowRect,
-                                            width: 2),
-                                        color: kColorOfBlueRect),
-                                    child: DropdownButtonHideUnderline(
-                                        child: DropdownButton<String>(
-                                      hint: Text(
-                                        selectedSubCategory.id == 1 ||
-                                                selectedSubCategory.id == 2
-                                            ? "  نوع مغير السرعة"
-                                            : selectedCategory.id == 8
-                                                ? "  الجنس"
-                                                : selectedSubCategory.id == 5
-                                                    ? "  جودة القطعة"
-                                                    : selectedSubCategory.id ==
-                                                            8
-                                                        ? "  نوع الوحدة"
-                                                        : selectedSubCategory
-                                                                    .id ==
-                                                                9
-                                                            ? "  نوع الفرش"
-                                                            : selectedSubCategory
-                                                                        .id ==
-                                                                    28
-                                                                ? "  طريقة الدفع"
-                                                                : selectedSubCategory
-                                                                            .id ==
-                                                                        10
-                                                                    ? "  الجنس"
-                                                                    : selectedSubCategory.id ==
-                                                                            33
-                                                                        ? "  طريقة الطلب"
-                                                                        : selectedSubCategory.id ==
-                                                                                11
-                                                                            ? "  تفاصيل الخط"
-                                                                            : selectedSubCategory.id == 14
-                                                                                ? "  نوع الشبكة"
-                                                                                : selectedSubCategory.id == 36
-                                                                                    ? "  المميزات"
-                                                                                    : "",
-                                        style: fieldsHint,
-                                      ),
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.white,
-                                      ),
-                                      elevation: 8,
-                                      value: selectedGear,
-                                      onChanged: (String value) {
-                                        setState(() {
-                                          selectedGear = value;
-                                          advertisment.gear = selectedGear;
-                                        });
-                                      },
-                                      underline: Container(
-                                        color: Colors.amber,
-                                      ),
-                                      items: selectedSubCategory.gear
-                                          .map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              new Text(value),
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
-                                    )),
-                                  ),
-                                ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: deviceHieght / 40,
-                            ),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                        color: kColorOfYellowRect, width: 2),
-                                    color: kColorOfBlueRect),
-                                child: TextFormField(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      advertisment.price = int.parse(value);
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.only(right: 8.0),
-                                      border: InputBorder.none,
-                                      hintText: selectedSubCategory.id == 10
-                                          ? "  الراتب"
-                                          : "  السعر",
-                                      hintStyle: fieldsHint),
-                                )),
-                          ),
-                          selectedSubCategory.id == 2
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.enginePower = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText: "  قوة المحرك",
-                                            hintStyle: fieldsHint),
-                                      )),
-                                )
-                              : Container(),
-                          selectedSubCategory.id == 9
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.enginePower = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText: "  العدد",
-                                            hintStyle: fieldsHint),
-                                      )),
-                                )
-                              : Container(),
-                          selectedSubCategory.id == 11 ||
-                                  selectedCategory.id == 36
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.enginePower = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText: "  وضوح الكاميرا",
-                                            hintStyle: fieldsHint),
-                                      )),
-                                )
-                              : Container(),
-                          selectedSubCategory.id == 2
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.enginePower = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText: "  حجم المحرك",
-                                            hintStyle: fieldsHint),
-                                      )),
-                                )
-                              : Container(),
-                          selectedSubCategory.id == 11 ||
-                                  selectedCategory.id == 35
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.enginePower = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText: "  مجمرك",
-                                            hintStyle: fieldsHint),
-                                      )),
-                                )
-                              : Container(),
-                          selectedSubCategory.id == 43
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                    top: deviceHieght / 40,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: kColorOfYellowRect,
-                                              width: 2),
-                                          color: kColorOfBlueRect),
-                                      child: TextFormField(
-                                        onChanged: (value) {
-                                          setState(() {
-                                            advertisment.engineSize = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(right: 8.0),
-                                            border: InputBorder.none,
-                                            hintText: "  نوع الخيل",
-                                            hintStyle: fieldsHint),
-                                      )),
-                                )
-                              : Container(),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: deviceHieght / 40,
-                            ),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                        color: kColorOfYellowRect, width: 2),
-                                    color: kColorOfBlueRect),
-                                child: TextFormField(
-                                  maxLines: null,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      advertisment.description = value;
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.only(right: 8.0),
-                                      border: InputBorder.none,
-                                      hintText: "  الوصف",
-                                      hintStyle: fieldsHint),
-                                )),
-                          ),
-                          selectedSubCategory.id == 1
-                              ? InkWell(
-                                  onTap: () {
-                                    selectVideo();
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: deviceHieght / 40,
-                                    ),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            border: Border.all(
-                                                color: kColorOfYellowRect,
-                                                width: 2),
-                                            color: kColorOfBlueRect),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Center(
-                                              child: Text("إضافة فيديو")),
-                                        )),
-                                  ),
-                                )
-                              : Container(),
-                          thumbnail == null
-                              ? Container()
-                              : Padding(
-                                padding:  EdgeInsets.only(top:deviceHieght/40),
-                                child: Container(width: deviceWidth/3,height: deviceWidth/3,child: Image.file(thumbnail)),
-                              )
-                        ],
                       ),
                     ),
-          InkWell(
-            onTap: () {
-              selectImages();
-            },
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: deviceHieght / 40,
+                    selectedSubCategory.guarantee.isEmpty
+                        ? Container()
+                        : Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: kColorOfYellowRect,
+                                width: 2),
+                            color: kColorOfBlueRect),
+                        child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              hint: Text(
+                                "  الضمان",
+                                style: fieldsHint,
+                              ),
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.white,
+                              ),
+                              elevation: 8,
+                              value: selectedGuarantee,
+                              onChanged: (String value) {
+                                setState(() {
+                                  selectedGuarantee = value;
+                                  advertisment.guarantee =
+                                      selectedGuarantee;
+                                });
+                              },
+                              underline: Container(
+                                color: Colors.amber,
+                              ),
+                              items: selectedSubCategory.guarantee
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      new Text(value),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            )),
+                      ),
+                    ),
+                    selectedCategory.id == 1 ||
+                        selectedCategory.id == 9 ||
+                        selectedCategory.id == 10
+                        ? Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.manufacturingYear =
+                                    value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: selectedCategory.id ==
+                                    9 ||
+                                    selectedSubCategory.id == 47
+                                    ? "العمر"
+                                    : "سنة الصنع",
+                                hintStyle: fieldsHint),
+                          )),
+                    )
+                        : Container(),
+                    selectedSubCategory.kilometers.isEmpty
+                        ? Container()
+                        : Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.kilometers = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText:
+                                selectedSubCategory.kilometers,
+                                hintStyle: fieldsHint),
+                          )),
+                    ),
+                    selectedSubCategory.gear.isEmpty
+                        ? Container()
+                        : Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: kColorOfYellowRect,
+                                width: 2),
+                            color: kColorOfBlueRect),
+                        child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              hint: Text(
+                                selectedSubCategory.id == 1 ||
+                                    selectedSubCategory.id == 2
+                                    ? "  نوع مغير السرعة"
+                                    : selectedCategory.id == 8
+                                    ? "  الجنس"
+                                    : selectedSubCategory.id == 5
+                                    ? "  جودة القطعة"
+                                    : selectedSubCategory.id ==
+                                    8
+                                    ? "  نوع الوحدة"
+                                    : selectedSubCategory
+                                    .id ==
+                                    9
+                                    ? "  نوع الفرش"
+                                    : selectedSubCategory
+                                    .id ==
+                                    28
+                                    ? "  طريقة الدفع"
+                                    : selectedSubCategory
+                                    .id ==
+                                    10
+                                    ? "  الجنس"
+                                    : selectedSubCategory.id ==
+                                    33
+                                    ? "  طريقة الطلب"
+                                    : selectedSubCategory.id ==
+                                    11
+                                    ? "  تفاصيل الخط"
+                                    : selectedSubCategory.id == 14
+                                    ? "  نوع الشبكة"
+                                    : selectedSubCategory.id == 36
+                                    ? "  المميزات"
+                                    : "",
+                                style: fieldsHint,
+                              ),
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.white,
+                              ),
+                              elevation: 8,
+                              value: selectedGear,
+                              onChanged: (String value) {
+                                setState(() {
+                                  selectedGear = value;
+                                  advertisment.gear = selectedGear;
+                                });
+                              },
+                              underline: Container(
+                                color: Colors.amber,
+                              ),
+                              items: selectedSubCategory.gear
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      new Text(value),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            )),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect, width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.price = int.parse(value);
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: selectedSubCategory.id == 10
+                                    ? "  الراتب"
+                                    : "  السعر",
+                                hintStyle: fieldsHint),
+                          )),
+                    ),
+                    selectedSubCategory.id == 2
+                        ? Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.enginePower = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "  قوة المحرك",
+                                hintStyle: fieldsHint),
+                          )),
+                    )
+                        : Container(),
+                    selectedSubCategory.id == 9
+                        ? Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.enginePower = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "  العدد",
+                                hintStyle: fieldsHint),
+                          )),
+                    )
+                        : Container(),
+                    selectedSubCategory.id == 11 ||
+                        selectedCategory.id == 36
+                        ? Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.enginePower = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "  وضوح الكاميرا",
+                                hintStyle: fieldsHint),
+                          )),
+                    )
+                        : Container(),
+                    selectedSubCategory.id == 2
+                        ? Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.enginePower = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "  حجم المحرك",
+                                hintStyle: fieldsHint),
+                          )),
+                    )
+                        : Container(),
+                    selectedSubCategory.id == 11 ||
+                        selectedCategory.id == 35
+                        ? Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.enginePower = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "  مجمرك",
+                                hintStyle: fieldsHint),
+                          )),
+                    )
+                        : Container(),
+                    selectedSubCategory.id == 43
+                        ? Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect,
+                                  width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.engineSize = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "  نوع الخيل",
+                                hintStyle: fieldsHint),
+                          )),
+                    )
+                        : Container(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: deviceHieght / 40,
+                      ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: kColorOfYellowRect, width: 2),
+                              color: kColorOfBlueRect),
+                          child: TextFormField(
+                            maxLines: null,
+                            onChanged: (value) {
+                              setState(() {
+                                advertisment.description = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                EdgeInsets.only(right: 8.0),
+                                border: InputBorder.none,
+                                hintText: "  الوصف",
+                                hintStyle: fieldsHint),
+                          )),
+                    ),
+                    selectedSubCategory.id == 1
+                        ? InkWell(
+                      onTap: () {
+                        selectVideo();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: deviceHieght / 40,
+                        ),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(20),
+                                border: Border.all(
+                                    color: kColorOfYellowRect,
+                                    width: 2),
+                                color: kColorOfBlueRect),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                  child: Text("إضافة فيديو")),
+                            )),
+                      ),
+                    )
+                        : Container(),
+                    thumbnail == null
+                        ? Container()
+                        : Padding(
+                      padding:  EdgeInsets.only(top:deviceHieght/40),
+                      child: Container(width: deviceWidth/3,height: deviceWidth/3,child: Image.file(thumbnail)),
+                    )
+                  ],
+                ),
               ),
-              child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: kColorOfYellowRect, width: 2),
-                      color: kColorOfBlueRect),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(child: Text("إضافة صور")),
-                  )),
-            ),
-          ),
-          imagesFile.isNotEmpty
-              ? Padding(
-                  padding: EdgeInsets.only(top: deviceHieght / 40),
-                  child: GridView.count(
-                    crossAxisCount: 5,
-                    shrinkWrap: true,
-                    children: List.generate(imagesFile.length, (index) {
-                      return Container(
-                        child: Image.file(imagesFile[index]),
-                      );
-                    }),
+              InkWell(
+                onTap: () {
+                  selectImages();
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: deviceHieght / 40,
                   ),
-                )
-              : Container(),
-          FloatingActionButton(
-              backgroundColor: Colors.amber,
-              onPressed: () async {
-           var    ad=  await strapiClient.create(
-                    "advertisments",
-                    {
-                      "name": advertisment.name,
-                      "sub_category": selectedSubCategory.id,
-                      "type_of_ads": advertisment.kindOfAdvertisment,
-                      "Governorate": advertisment.governorate,
-                      "city": advertisment.city,
-                      "category": advertisment.category,
-                      "models": advertisment.models,
-                      "status": advertisment.status,
-                      "guarantee": advertisment.guarantee,
-                      "manufacturing_year": advertisment.manufacturingYear,
-                      "kilometers": advertisment.kilometers,
-                      "gear": advertisment.gear,
-                      "price": advertisment.price,
-                      "subject": "s",
-                      "description": advertisment.description,
-                      "user_id":user.id.toString(),
-                      "user_number": user.phoneNumber,
-                      "user_token": user.jwt,
-                      "views": 0,
-                      "engine_power": advertisment.enginePower,
-                      "engine_size": advertisment.engineSize
-                    },
-                    options: Options(contentType: "application/json", headers: {
-                      'Authorization':
-                          'Bearer $jwt',
-                    }),
-                  );
-           print(ad.toString());
-          await  uploadMultipleImage(imagesFile,ad["id"].toString());
-           await uploadVideo(videoFile,ad["id"].toString());
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: kColorOfYellowRect, width: 2),
+                          color: kColorOfBlueRect),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text("إضافة صور")),
+                      )),
+                ),
+              ),
+              imagesFile.isNotEmpty
+                  ? Padding(
+                padding: EdgeInsets.only(top: deviceHieght / 40),
+                child: GridView.count(
+                  crossAxisCount: 5,
+                  shrinkWrap: true,
+                  children: List.generate(imagesFile.length, (index) {
+                    return Container(
+                      child: Image.file(imagesFile[index]),
+                    );
+                  }),
+                ),
+              )
+                  : Container(),
+              FloatingActionButton(
+                  backgroundColor: Colors.amber,
+                  onPressed: () async {
+                    var    ad=  await strapiClient.create(
+                      "advertisments",
+                      {
+                        "name": advertisment.name,
+                        "sub_category": selectedSubCategory.id,
+                        "type_of_ads": advertisment.kindOfAdvertisment,
+                        "Governorate": advertisment.governorate,
+                        "city": advertisment.city,
+                        "category": advertisment.category,
+                        "models": advertisment.models,
+                        "status": advertisment.status,
+                        "guarantee": advertisment.guarantee,
+                        "manufacturing_year": advertisment.manufacturingYear,
+                        "kilometers": advertisment.kilometers,
+                        "gear": advertisment.gear,
+                        "price": advertisment.price,
+                        "subject": "s",
+                        "description": advertisment.description,
+                        "user_id":user.id.toString(),
+                        "user_number": user.phoneNumber,
+                        "user_token": user.jwt,
+                        "views": 0,
+                        "engine_power": advertisment.enginePower,
+                        "engine_size": advertisment.engineSize
+                      },
+                      options: Options(contentType: "application/json", headers: {
+                        'Authorization':
+                        'Bearer $jwt',
+                      }),
+                    );
+                    print(ad.toString());
+                    await  uploadMultipleImage(imagesFile,ad["id"].toString());
+                    await uploadVideo(videoFile,ad["id"].toString());
 
-              })
-        ],
-      ),
-    ));
+                  })
+            ],
+          ),
+        ));
   }
 
   Future<void> selectImages() async {
@@ -1034,9 +1034,9 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
   }
 
   Future<void> selectVideo() async {
-   final ImagePicker _picker=ImagePicker();
-      videoFile = await _picker.pickVideo(
-      source: ImageSource.gallery,
+    final ImagePicker _picker=ImagePicker();
+    videoFile = await _picker.pickVideo(
+      source: ImageSource.camera,
       maxDuration: const Duration(seconds: 60),
     );
     var video = await VideoCompress.compressVideo(videoFile.path,
@@ -1073,7 +1073,7 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
     Map<String, String> headers = {
       "Accept": "application/json",
       'Authorization':
-          "Bearer $jwt"
+      "Bearer $jwt"
     };
 
 //add headers
@@ -1081,13 +1081,13 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
 
 //adding params
     request.fields['ref'] = "advertisment";
- request.fields['refId'] = adId;
- request.fields['field'] = 'imagess';
+    request.fields['refId'] = adId;
+    request.fields['field'] = 'imagess';
 
 // send
     var responseStream = await request.send();
     var response =  await responseStream.stream.bytesToString();
-   json.decode(response.toString())
+    json.decode(response.toString())
         .map((data) => advertisment.imagess.add(data["url"]))
         .toList();
 
@@ -1099,22 +1099,22 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
 // create multipart request
     var request = new http.MultipartRequest("POST", uri);
 
-      String fileName = file.path.split("/").last;
-      var stream = new http.ByteStream(DelegatingStream.typed(file.openRead()));
+    String fileName = file.path.split("/").last;
+    var stream = new http.ByteStream(DelegatingStream.typed(file.openRead()));
 
-      // get file length
+    // get file length
 
-      var length = await file.length(); //imageFile is your image file
+    var length = await file.length(); //imageFile is your image file
 
-      // multipart that takes file
-      var multipartFileSign = new http.MultipartFile('files', stream, length,
-          filename: fileName, contentType: MediaType('video', 'mp4'));
-      request.files.add(multipartFileSign);
+    // multipart that takes file
+    var multipartFileSign = new http.MultipartFile('files', stream, length,
+        filename: fileName, contentType: MediaType('video', 'mp4'));
+    request.files.add(multipartFileSign);
 
     Map<String, String> headers = {
       "Accept": "application/json",
       'Authorization':
-          "Bearer $jwt"
+      "Bearer $jwt"
     };
 
 //add headers

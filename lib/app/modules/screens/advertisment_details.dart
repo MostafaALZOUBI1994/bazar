@@ -240,10 +240,18 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                               child: Container(
-                                child: FlickVideoPlayer(
-                                  wakelockEnabled: true,
-                                  flickManager: flickManager,
-                                ),
+                                child: widget.advertisment.video == ""
+                                    ? Text("لا يوجد فيديو",style: TextStyle(
+                                  color: kColorOfYellowRect
+                                ),)
+                                    : FittedBox(
+                                      child: SizedBox(height:deviceHieght/4 ,
+                                        child: FlickVideoPlayer(
+                                            wakelockEnabled: true,
+                                            flickManager: flickManager,
+                                          ),
+                                      ),
+                                    ),
                               ),
                             ),
                           ),
@@ -257,25 +265,23 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
 
   Widget _description(String fieldName, String fieldValue) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: RichText(text: TextSpan(
-        children: [
-          TextSpan(text:
-            fieldName + " : ",
-            style: TextStyle(
-                color: kColorOfCanvas, fontWeight: FontWeight.bold),
-          ),
-          TextSpan(text:
-           "  ",
-
-          ),
-          TextSpan(text:
-            fieldValue,
-            style: TextStyle(color: kColorOfOrangeRect),
-          )
-        ]
-      ),)
-    );
+        padding: const EdgeInsets.all(8.0),
+        child: RichText(
+          text: TextSpan(children: [
+            TextSpan(
+              text: fieldName + " : ",
+              style:
+                  TextStyle(color: kColorOfCanvas, fontWeight: FontWeight.bold),
+            ),
+            TextSpan(
+              text: "  ",
+            ),
+            TextSpan(
+              text: fieldValue,
+              style: TextStyle(color: kColorOfOrangeRect),
+            )
+          ]),
+        ));
   }
 
   _launch(url) async {
@@ -320,6 +326,7 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                 child: FabCircularMenu(
                     ringWidth: 60,
                     alignment: Alignment.bottomLeft,
+                    ringColor: kColorOfYellowRect,
                     children: <Widget>[
                       IconButton(
                           icon: Icon(
@@ -329,9 +336,10 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                           onPressed: () {
                             _launch("sms:+96399247870");
                           }),
-                      InkWell(onTap: (){
-                        _launch('whatsapp://send?&phone=+963992478760');
-                      },
+                      InkWell(
+                        onTap: () {
+                          _launch('whatsapp://send?&phone=+963992478760');
+                        },
                         child: Image.asset(
                           "assets/images/whatsapp.png",
                           height: 50,
@@ -352,7 +360,8 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                         onPressed: () {},
                         child: IconButton(
                             icon: Icon(Icons.message, color: Colors.white),
-                            onPressed: () {_launch("sms:+963992478760");
+                            onPressed: () {
+                              _launch("sms:+963992478760");
                             }),
                       )
                     ]),

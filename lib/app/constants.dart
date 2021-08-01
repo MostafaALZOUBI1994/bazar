@@ -36,4 +36,4 @@ final strapiClient = Strapi(
 TextStyle fieldsHint=TextStyle(color: Colors.white,);
 
 
-const baseUrl = 'http://192.168.1.102:1337';
+const baseUrl = 'http://192.168.43.214:1337';
