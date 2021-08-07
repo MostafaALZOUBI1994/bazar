@@ -1,7 +1,6 @@
     <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bazarcom">
     <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
    <application
         android:label="bazarcom"
        android:usesCleartextTraffic="true"

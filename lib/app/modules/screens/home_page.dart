@@ -12,14 +12,15 @@ import 'package:bazarcom/app/modules/controllers/auth_controller.dart';
 import 'package:bazarcom/app/modules/screens/advertisment_page.dart';
 import 'package:bazarcom/app/modules/controllers/home_controller.dart';
 import 'package:bazarcom/app/modules/screens/singup_login_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
 import 'add_addvertisment.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,11 +41,31 @@ class _HomePageState extends State<HomePage> {
       httpClient: http.Client(),
     ),
   );
+  getToken() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    print(await messaging.getToken());
+  }
+  @override
+  void initState() {
+    super.initState();
+    getToken();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     final AuthController c = Get.put(AuthController(authRepository));
     final HomeController homeController = Get.put(HomeController(repository: categoryRepository));
-    AuthStorage().isLogged()?c.getUserProfile():(){};
+    AuthStorage().isLogged()?c.getUserProfile():()=>{};
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -55,8 +76,7 @@ class _HomePageState extends State<HomePage> {
             c.user.jwt == null
                 ? Get.to(() => SingupLoginPage())
                 : Get.to(() => AddAdvertisment(homeController: homeController,authController: c,));
-          },
-          //params
+          },//params
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AnimatedBottomNavigationBar(

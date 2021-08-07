@@ -41,7 +41,7 @@ class CategoryApi {
         print('Error -getId');
       }
     } catch (ex) {
-      print("getAllCategories " + ex.toString());
+      print("getCategoryById " + ex.toString());
     }
     return null;
   }
