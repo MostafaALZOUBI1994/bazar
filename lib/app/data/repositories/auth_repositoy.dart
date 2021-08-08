@@ -11,6 +11,8 @@ class AuthRepository {
     return await apiClient.register(name,email,password,phoneNumber);
   }
 
+
+
   login(String email,String password) async {
     return await apiClient.login(email,password);
   }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import 'models/models.dart' as models;
@@ -300,6 +302,17 @@ class Strapi {
       return models.ErrorResponse(e.toString());
     }
   }
+  //Todo baseUrl
+  ///update fcm
+  Future updateFcm(String userId,String jwt,String fcmToken) async {
+   var response=await http.put("http://192.168.43.214:1337/users/$userId",data: jsonEncode(
+       {
+         "fcmToken":fcmToken
+       }),options: Options(contentType: "application/json", headers: {
+     'Authorization': 'Bearer $jwt',
+   }),);
+   print(response.toString());
+  }
 
   /// Collection Type - Delete a {content-type} entry
   ///
@@ -420,7 +433,7 @@ class Strapi {
     String username,
     String email,
     String password,
-        String phoneNumber,{
+        String phoneNumber,String fcmToken,{
     Options? options,
   }) async {
     try {
@@ -431,7 +444,8 @@ class Strapi {
           'username': username,
           'email': email,
           'password': password,
-          'phoneNumber': phoneNumber
+          'phoneNumber': phoneNumber,
+          "fcmToken":fcmToken
         },
       );
 
@@ -489,12 +503,13 @@ class Strapi {
       }
       else{
 
-
       }
 
       return models.ErrorResponse(e.toString());
     }
   }
+
+
 
   /// Local password recovery email
   Future<models.Response<Object>> forgotPassword(
@@ -627,6 +642,9 @@ class Strapi {
 
   /// HTTP PUT to server
   /// {@macro queryParameters}
+  ///
+
+
   Future<models.Response<Object>> put(
     String path, {
     Map<String, dynamic> queryParameters = const {},

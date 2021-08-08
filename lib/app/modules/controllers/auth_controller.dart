@@ -14,7 +14,9 @@ class AuthController extends GetxController {
   signUp(String name, String email, String password,String phoneNumber) async {
     user = await authRepository.register(name, email, password,phoneNumber);
     authRepository.saveUserToken(user.jwt);
+    Get.off(HomePage());
   }
+
 
   login(String email,String password) async {
     user = await authRepository.login( email, password);

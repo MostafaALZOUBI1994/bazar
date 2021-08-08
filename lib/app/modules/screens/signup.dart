@@ -60,13 +60,7 @@ class SignUp extends StatelessWidget {
           height: deviceHieght / 30,
         ),
         TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) {
-            if (!GetUtils.isEmail(value)) {
-              return "أدخل إيميلك بشكل صحيح";
-            } else
-              return null;
-          },
+
           controller: emailController,
           decoration: InputDecoration(
             hintText: LocaleKeys.email.tranlation(),

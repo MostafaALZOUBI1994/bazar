@@ -20,9 +20,10 @@ class CategoryApi {
       final response = await httpClient.get(Uri.parse(baseUrl + "/categories"));
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
-        return jsonResponse
+         jsonResponse
             .map((json) => categories.add(CategoryModel.fromJson(json)))
             .toList();
+         return categories;
       } else {
         print('Error -getAll');
       }

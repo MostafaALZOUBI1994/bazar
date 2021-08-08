@@ -237,7 +237,7 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                             ),
                           )
                         : Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(top:60.0),
                             child: Center(
                               child: Container(
                                 child: widget.advertisment.video == ""
@@ -245,7 +245,7 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                                   color: kColorOfYellowRect
                                 ),)
                                     : FittedBox(
-                                      child: SizedBox(height:deviceHieght/4 ,
+                                      child: SizedBox(height:deviceHieght/4 ,width: deviceWidth/2,
                                         child: FlickVideoPlayer(
                                             wakelockEnabled: true,
                                             flickManager: flickManager,

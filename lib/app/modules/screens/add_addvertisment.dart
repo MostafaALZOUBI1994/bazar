@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:bazarcom/app/data/models/category_model.dart';
 import 'package:bazarcom/app/data/models/user_model.dart';
-import 'package:bazarcom/app/global_widgets/textfield.dart';
+import 'package:bazarcom/app/global_widgets/loadingText.dart';
+import 'package:bazarcom/app/global_widgets/snackbar.dart';
 import 'package:bazarcom/app/modules/controllers/auth_controller.dart';
 import 'package:bazarcom/app/modules/controllers/home_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,9 +16,12 @@ import 'package:bazarcom/app/constants.dart';
 import 'package:bazarcom/app/data/models/advertisment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_pickers/image_pickers.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:video_compress/video_compress.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'home_page.dart';
 
 class AddAdvertisment extends StatefulWidget {
   final HomeController homeController;
@@ -28,6 +33,8 @@ class AddAdvertisment extends StatefulWidget {
 }
 
 class _AddAdvertismentState extends State<AddAdvertisment> {
+  final RoundedLoadingButtonController _btnController =
+      RoundedLoadingButtonController();
   CategoryModel selectedCategory;
   SubCategory selectedSubCategory;
   String selectedKindOfAds;
@@ -92,6 +99,45 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
     user = widget.authController.user;
     jwt = widget.authController.user.jwt;
     super.initState();
+  }
+
+  void addAd() async {
+    var ad = await strapiClient.create(
+      "advertisments",
+      {
+        "name": advertisment.name,
+        "sub_category": selectedSubCategory.id,
+        "type_of_ads": advertisment.kindOfAdvertisment,
+        "Governorate": advertisment.governorate,
+        "city": advertisment.city,
+        "category": advertisment.category,
+        "models": advertisment.models,
+        "status": advertisment.status,
+        "guarantee": advertisment.guarantee,
+        "manufacturing_year": advertisment.manufacturingYear,
+        "kilometers": advertisment.kilometers,
+        "gear": advertisment.gear,
+        "price": advertisment.price,
+        "subject": "s",
+        "description": advertisment.description,
+        "user_id": user.id.toString(),
+        "user_number": user.phoneNumber,
+        "user_token": user.jwt,
+        "views": 0,
+        "engine_power": advertisment.enginePower,
+        "engine_size": advertisment.engineSize
+      },
+      options: Options(contentType: "application/json", headers: {
+        'Authorization': 'Bearer $jwt',
+      }),
+    );
+    print(ad.toString());
+    await uploadMultipleImage(imagesFile, ad["id"].toString());
+    uploadVideo(videoFile, ad["id"].toString()).then((value) {
+      _btnController.success();
+      showSnakBarTop("تمت إضافة الإعلان",kColorOfYellowRect);
+      Get.off(HomePage());
+    });
   }
 
   @override
@@ -1011,43 +1057,19 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
                       ),
                     )
                   : Container(),
-              FloatingActionButton(
-                  backgroundColor: Colors.amber,
-                  onPressed: () async {
-                    var ad = await strapiClient.create(
-                      "advertisments",
-                      {
-                        "name": advertisment.name,
-                        "sub_category": selectedSubCategory.id,
-                        "type_of_ads": advertisment.kindOfAdvertisment,
-                        "Governorate": advertisment.governorate,
-                        "city": advertisment.city,
-                        "category": advertisment.category,
-                        "models": advertisment.models,
-                        "status": advertisment.status,
-                        "guarantee": advertisment.guarantee,
-                        "manufacturing_year": advertisment.manufacturingYear,
-                        "kilometers": advertisment.kilometers,
-                        "gear": advertisment.gear,
-                        "price": advertisment.price,
-                        "subject": "s",
-                        "description": advertisment.description,
-                        "user_id": user.id.toString(),
-                        "user_number": user.phoneNumber,
-                        "user_token": user.jwt,
-                        "views": 0,
-                        "engine_power": advertisment.enginePower,
-                        "engine_size": advertisment.engineSize
-                      },
-                      options:
-                          Options(contentType: "application/json", headers: {
-                        'Authorization': 'Bearer $jwt',
-                      }),
-                    );
-                    print(ad.toString());
-                    await uploadMultipleImage(imagesFile, ad["id"].toString());
-                    await uploadVideo(videoFile, ad["id"].toString());
-                  })
+              Padding(
+                padding: EdgeInsets.only(
+                  top: deviceHieght / 40,
+                ),
+                child: RoundedLoadingButton(
+                  width: deviceWidth,
+                  child: Text('إضافة إعلان',
+                      style: TextStyle(color: Colors.white)),
+                  color: kColorOfYellowRect,
+                  controller: _btnController,
+                  onPressed: addAd,
+                ),
+              ),
             ],
           ),
         ));
@@ -1092,7 +1114,7 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
     var video = await VideoCompress.compressVideo(videoFile.path,
         quality: VideoQuality.LowQuality);
     thumbnail = await VideoCompress.getFileThumbnail(video.path);
-    // Get.back();
+    Get.back();
     setState(() {});
 
     //  uploadMultipleImage(imagesFile);

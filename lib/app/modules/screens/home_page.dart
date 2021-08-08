@@ -41,23 +41,11 @@ class _HomePageState extends State<HomePage> {
       httpClient: http.Client(),
     ),
   );
-  getToken() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-    await messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-    print(await messaging.getToken());
-  }
+
   @override
   void initState() {
     super.initState();
-    getToken();
+
 
   }
 
