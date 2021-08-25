@@ -1,3 +1,4 @@
+
 import 'package:bazarcom/app/data/models/advertisment_model.dart';
 import 'package:bazarcom/app/data/repositories/advertisment_repository.dart';
 import 'package:get/get_rx/get_rx.dart';
@@ -7,7 +8,6 @@ class AdvertismentController extends GetxController {
   final AdvertismentRepository adsRepo;
   final int subId;
   var isLoading=false.obs;
-
   AdvertismentController(this.adsRepo, this.subId)  : assert(adsRepo != null );
 
 
@@ -27,11 +27,12 @@ class AdvertismentController extends GetxController {
   getAds(subId) async {
     try{
       isLoading(true);
-      advertismentList=await adsRepo.getId(subId);
+      advertismentList=await adsRepo.getAll(subId);
     }finally
         {
           isLoading(false);
         }
         update();
   }
+
 }

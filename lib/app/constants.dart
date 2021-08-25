@@ -1,4 +1,3 @@
-
 import 'package:dart_strapi/dart_strapi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,16 +23,17 @@ const Gradient kOrangeGradient = LinearGradient(
   end: Alignment.bottomRight,
 );
 
-var deviceWidth=Get.width;
+var deviceWidth = Get.width;
 
-var deviceHieght=Get.height;
+var deviceHieght = Get.height;
 
 final strapiClient = Strapi(
- baseUrl,
+  baseUrl,
   // token: 'token',
 );
 
-TextStyle fieldsHint=TextStyle(color: Colors.white,);
+TextStyle fieldsHint = TextStyle(
+  color: Colors.white,
+);
 
-
-const baseUrl = 'http://192.168.43.214:1337';
+const baseUrl = 'http://192.168.1.10:1337';

@@ -52,6 +52,7 @@ dependencies:
   video_compress: ^3.1.0
   quiver: ^3.0.1
   rounded_loading_button: ^2.0.5
+  circular_reveal_animation: ^1.1.5
   dart_strapi:
     path: ./dart_strapi-1.1.0
 

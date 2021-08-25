@@ -71,7 +71,13 @@ class Advertisment {
   Advertisment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    subCategory = json['sub_category'];
+    if(json['sub_category'] is Map){
+      subCategory = json['sub_category']["id"];
+    }
+    else{
+      subCategory = json['sub_category'];
+    }
+
     typeOfAds = json['type_of_ads'];
     governorate = json['Governorate'];
     city = json['city'];

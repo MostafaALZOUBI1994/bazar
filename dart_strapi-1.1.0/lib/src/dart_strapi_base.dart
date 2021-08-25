@@ -305,10 +305,11 @@ class Strapi {
   //Todo baseUrl
   ///update fcm
   Future updateFcm(String userId,String jwt,String fcmToken) async {
-   var response=await http.put("http://192.168.43.214:1337/users/$userId",data: jsonEncode(
+   var response=await http.put("http://192.168.1.10:1337/users/$userId",data: jsonEncode(
        {
          "fcmToken":fcmToken
-       }),options: Options(contentType: "application/json", headers: {
+       }),options: Options(contentType: "application/json",
+       headers: {
      'Authorization': 'Bearer $jwt',
    }),);
    print(response.toString());

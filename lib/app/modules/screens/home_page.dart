@@ -11,8 +11,8 @@ import 'package:bazarcom/app/modules/controllers/auth_controller.dart';
 
 import 'package:bazarcom/app/modules/screens/advertisment_page.dart';
 import 'package:bazarcom/app/modules/controllers/home_controller.dart';
+import 'package:bazarcom/app/modules/screens/my_advertiment.dart';
 import 'package:bazarcom/app/modules/screens/singup_login_screen.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -21,21 +21,14 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'add_addvertisment.dart';
 
-
-class HomePage extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
-  var _bottomNavIndex = 0;
-  final iconList = <IconData>[
-    Icons.home,
-    Icons.account_circle,
-  ];
-  final AuthRepository authRepository = AuthRepository(
-    apiClient: AuthApiClient(),authStorage: AuthStorage()
-  );
+class _MainScreenState extends State<MainScreen> {
+  final AuthRepository authRepository =
+      AuthRepository(apiClient: AuthApiClient(), authStorage: AuthStorage());
   final CategoryRepository categoryRepository = CategoryRepository(
     apiClient: CategoryApi(
       httpClient: http.Client(),
@@ -45,15 +38,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
-
   }
 
   @override
   Widget build(BuildContext context) {
     final AuthController c = Get.put(AuthController(authRepository));
-    final HomeController homeController = Get.put(HomeController(repository: categoryRepository));
-    AuthStorage().isLogged()?c.getUserProfile():()=>{};
+    final HomeController homeController =
+        Get.put(HomeController(repository: categoryRepository));
+    AuthStorage().isLogged() ? c.getUserProfile() : () => {};
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -63,22 +55,13 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             c.user.jwt == null
                 ? Get.to(() => SingupLoginPage())
-                : Get.to(() => AddAdvertisment(homeController: homeController,authController: c,));
-          },//params
+                : Get.to(() => AddAdvertisment(
+                      homeController: homeController,
+                      authController: c,
+                    ));
+          }, //params
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: AnimatedBottomNavigationBar(
-          icons: iconList, activeColor: kColorOfYellowRect,
-          backgroundColor: kColorOfCanvas,
-          activeIndex: _bottomNavIndex,
-          gapLocation: GapLocation.center,
-          notchSmoothness: NotchSmoothness.defaultEdge,
-          leftCornerRadius: 32,
-          rightCornerRadius: 32,
-          onTap: (index) => setState(() => _bottomNavIndex = index),
-
-          //other params
-        ),
         appBar: AppBar(
           toolbarHeight: deviceHieght / 15,
           title: Container(
@@ -87,6 +70,20 @@ class _HomePageState extends State<HomePage> {
             width: deviceWidth / 2,
             height: deviceHieght / 10,
           )),
+          leading: AuthStorage().isLogged()
+              ? IconButton(
+                  icon: Icon(
+                    Icons.account_circle,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Get.to(MyAdvertisments(
+                      userId: c.user.id,
+                      jwt: c.user.jwt,
+                    ));
+                  },
+                )
+              : Container(),
           centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
@@ -137,7 +134,6 @@ class _HomePageState extends State<HomePage> {
                                         (BuildContext context, int indexSub) {
                                       SubCategory subCategory =
                                           category.subCategories[indexSub];
-
                                       return InkWell(
                                         onTap: () {
                                           Get.to(AdvertismentsList(

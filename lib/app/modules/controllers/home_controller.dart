@@ -36,8 +36,4 @@ class HomeController extends GetxController {
     update();
   }
 
-  List mainCategories (categoriesList){
-    List mainCategoriesList =[];
-
-  }
 }

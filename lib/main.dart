@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         backGroundColor: kColorOfCanvas,
         animationEffect: 'zoom-in',
         logoSize: 400,
-        home: HomePage(),
+        home: MainScreen(),
         duration: 4000,
         type: CustomSplashType.StaticDuration,
 

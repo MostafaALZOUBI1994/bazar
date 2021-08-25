@@ -136,11 +136,11 @@ class _AddAdvertismentState extends State<AddAdvertisment> {
     uploadVideo(videoFile, ad["id"].toString()).then((value) {
       _btnController.success();
       showSnakBarTop("تمت إضافة الإعلان",kColorOfYellowRect);
-      Get.off(HomePage());
+      Get.off(MainScreen());
     });
   }
 
-  @override
+  @override                           
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(

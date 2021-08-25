@@ -5,7 +5,6 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:bazarcom/app/utils/utils/codegen_loader.g.dart';
 import 'package:bazarcom/app/utils/utils/locale_keys.g.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,7 +23,9 @@ class AdevertismentDetailPage extends StatefulWidget {
 
 class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
   int selected = 0;
+  String phoneNumber="";
   FlickManager flickManager;
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +33,11 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
       videoPlayerController:
           VideoPlayerController.network(baseUrl + widget.advertisment.video),
     );
+
+    phoneNumber=widget.advertisment.userNumber;
+    if(phoneNumber.startsWith("0")){
+     phoneNumber= phoneNumber.substring(1);
+    };
   }
 
   @override
@@ -278,7 +284,7 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
             ),
             TextSpan(
               text: fieldValue,
-              style: TextStyle(color: kColorOfOrangeRect),
+              style: TextStyle(color: kColorOfYellowRect),
             )
           ]),
         ));
@@ -334,11 +340,11 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                             color: kOrangeColor,
                           ),
                           onPressed: () {
-                            _launch("sms:+96399247870");
+                            _launch("sms:+963$phoneNumber");
                           }),
                       InkWell(
                         onTap: () {
-                          _launch('whatsapp://send?&phone=+963992478760');
+                          _launch('whatsapp://send?phone=+963$phoneNumber');
                         },
                         child: Image.asset(
                           "assets/images/whatsapp.png",
@@ -348,7 +354,7 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                       FloatingActionButton(
                         backgroundColor: kColorOfCanvas,
                         onPressed: () {
-                          _launch("tel:+963992478760");
+                          _launch("tel:+963$phoneNumber");
                         },
                         child: Icon(
                           Icons.phone,
@@ -361,7 +367,7 @@ class _AdevertismentDetailPageState extends State<AdevertismentDetailPage> {
                         child: IconButton(
                             icon: Icon(Icons.message, color: Colors.white),
                             onPressed: () {
-                              _launch("sms:+963992478760");
+                              _launch("sms:+963$phoneNumber");
                             }),
                       )
                     ]),

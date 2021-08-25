@@ -73,10 +73,18 @@ class AdvertismentsList extends StatelessWidget {
                                       child: FadeInAnimation(
                                         child: InkWell(
                                           onTap: () async {
+                                            await AdvertismentApiClient(
+                                                httpClient: null)
+                                                .addView(
+                                                advertisment.id.toString(),
+                                                advertisment.views
+                                            );
+                                            _.onInit();
                                             var fields = CategoryApi(
                                                     httpClient: null)
                                                 .getFieldsRelatedToSubCategories(
                                                     subCategryId, advertisment);
+
                                             Get.to(AdevertismentDetailPage(
                                               advertisment: advertisment,
                                               fields: fields,
@@ -105,21 +113,39 @@ class AdvertismentsList extends StatelessWidget {
                                                         .spaceAround,
                                                 children: [
                                                   Flexible(
-                                                    child:advertisment.imagess.isEmpty?
-                                              CachedNetworkImage(
-                                              imageUrl:  "https://i.stack.imgur.com/y9DpT.jpg",
-                                                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                                    CircularProgressIndicator(value: downloadProgress.progress),
-                                                errorWidget: (context, url, error) => Icon(Icons.error),
-                                              )
+                                                    child: advertisment
+                                                            .imagess.isEmpty
+                                                        ? CachedNetworkImage(
+                                                            imageUrl:
+                                                                "https://i.stack.imgur.com/y9DpT.jpg",
+                                                            progressIndicatorBuilder: (context,
+                                                                    url,
+                                                                    downloadProgress) =>
+                                                                CircularProgressIndicator(
+                                                                    value: downloadProgress
+                                                                        .progress),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                          )
                                                         : CachedNetworkImage(
-                                                      imageUrl:  baseUrl +
-                                                  advertisment
-                                                  .imagess[0],
-                                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                                          CircularProgressIndicator(value: downloadProgress.progress),
-                                                      errorWidget: (context, url, error) => Icon(Icons.error),
-                                                    ),
+                                                            imageUrl: baseUrl +
+                                                                advertisment
+                                                                    .imagess[0],
+                                                            progressIndicatorBuilder: (context,
+                                                                    url,
+                                                                    downloadProgress) =>
+                                                                CircularProgressIndicator(
+                                                                    value: downloadProgress
+                                                                        .progress),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                          ),
                                                   ),
                                                   Row(
                                                     children: [
@@ -145,13 +171,17 @@ class AdvertismentsList extends StatelessWidget {
                                                       Icon(
                                                         Icons
                                                             .remove_red_eye_outlined,
-                                                        color: kOrangeColor,
+                                                        color:
+                                                            kColorOfYellowRect,
+                                                      ),
+                                                      SizedBox(
+                                                        width: deviceWidth / 80,
                                                       ),
                                                       Text(
-                                                        advertisment.views.toString(),
+                                                        advertisment.views
+                                                            .toString(),
                                                         style: TextStyle(
-                                                          color:
-                                                              kColorOfCanvas,
+                                                          color: kColorOfCanvas,
                                                         ),
                                                       ),
                                                     ],
@@ -164,14 +194,17 @@ class AdvertismentsList extends StatelessWidget {
                                                       Icon(
                                                         Icons
                                                             .monetization_on_outlined,
-                                                        color: kOrangeColor,
+                                                        color:
+                                                            kColorOfYellowRect,
+                                                      ),
+                                                      SizedBox(
+                                                        width: deviceWidth / 80,
                                                       ),
                                                       Text(
                                                         advertisment.price
                                                             .toString(),
                                                         style: TextStyle(
-                                                          color:
-                                                              kColorOfCanvas,
+                                                          color: kColorOfCanvas,
                                                         ),
                                                       ),
                                                     ],

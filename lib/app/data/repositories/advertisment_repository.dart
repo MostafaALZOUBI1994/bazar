@@ -7,8 +7,12 @@ class AdvertismentRepository {
   AdvertismentRepository({@required this.apiClient}) : assert(apiClient != null);
 
 
-  getId(id) {
+  getAll(id) {
     return apiClient.getAdvertisment(id);
+  }
+
+  getMyAdvertisments(id){
+    return apiClient.getMyAdvertisment(id);
   }
 }
  
